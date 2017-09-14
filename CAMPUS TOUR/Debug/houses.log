@@ -1,0 +1,44 @@
+﻿Build started 9/14/2017 7:19:10 PM.
+     1>Project "\\vmware-host\Shared Folders\Desktop\Fractal\CAMPUS TOUR\houses.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc120.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt AABB.CPP AABBLinkedList.cpp AABBNode.cpp camera.cpp cameraMap.cpp collision.cpp EasySound.cpp main.cpp PlainLinkedList.cpp PlainNode.cpp PsyExerciseBuilding.cpp Sound.cpp SoundTime.cpp texturedPolygons.cpp
+         texturedPolygons.cpp
+         SoundTime.cpp
+         Sound.cpp
+         PsyExerciseBuilding.cpp
+         PlainNode.cpp
+         PlainLinkedList.cpp
+         main.cpp
+         EasySound.cpp
+         collision.cpp
+         cameraMap.cpp
+         camera.cpp
+         AABBNode.cpp
+         AABBLinkedList.cpp
+         AABB.CPP
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\houses.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:".\Debug\houses.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\houses.lib" /MACHINE:X86 /SAFESEH .\Debug\AABB.obj
+         .\Debug\AABBLinkedList.obj
+         .\Debug\AABBNode.obj
+         .\Debug\camera.obj
+         .\Debug\cameraMap.obj
+         .\Debug\collision.obj
+         .\Debug\EasySound.obj
+         .\Debug\main.obj
+         .\Debug\PlainLinkedList.obj
+         .\Debug\PlainNode.obj
+         .\Debug\PsyExerciseBuilding.obj
+         .\Debug\Sound.obj
+         .\Debug\SoundTime.obj
+         .\Debug\texturedPolygons.obj
+         LINK : .\Debug\houses.exe not found or not built by the last incremental link; performing full link
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+         houses.vcxproj -> \\vmware-host\Shared Folders\Desktop\Fractal\CAMPUS TOUR\.\Debug\houses.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o".\Debug\houses.bsc" .\Debug\AABB.sbr .\Debug\AABBLinkedList.sbr .\Debug\AABBNode.sbr .\Debug\camera.sbr .\Debug\cameraMap.sbr .\Debug\collision.sbr .\Debug\EasySound.sbr .\Debug\main.sbr .\Debug\PlainLinkedList.sbr .\Debug\PlainNode.sbr .\Debug\PsyExerciseBuilding.sbr .\Debug\Sound.sbr .\Debug\SoundTime.sbr .\Debug\texturedPolygons.sbr
+     1>Done Building Project "\\vmware-host\Shared Folders\Desktop\Fractal\CAMPUS TOUR\houses.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:31.55
