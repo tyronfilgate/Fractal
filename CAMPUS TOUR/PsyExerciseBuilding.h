@@ -27,11 +27,15 @@ private:
 	void DrawEntranceRoom();
 	void DrawStairsDown();
 	void DrawStairsUp();
+	void DrawLevelZero();
+	void DrawLevelOneHalf();
 
 	void DisplayDoorway();
 	void DisplayEntranceRoom();
 	void DisplayStairsDown();
 	void DisplayStairsUp();
+	void DisplayLevelZero();
+	void DisplayLevelOneHalf();
 
 	TexturedPolygons* tp;
 	Camera* cam;

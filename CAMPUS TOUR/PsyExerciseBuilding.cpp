@@ -51,6 +51,8 @@ void PsyExerciseBuilding::DrawPEB()
 	DrawEntranceRoom();
 	DrawStairsDown();
 	DrawStairsUp();
+	DrawLevelZero();
+	DrawLevelOneHalf();
 }
 
 //--------------------------------------------------------------------------------------
@@ -62,6 +64,9 @@ void PsyExerciseBuilding::DisplayPEB()
 	DisplayEntranceRoom();
 	DisplayStairsDown();
 	DisplayStairsUp();
+	DisplayStairsUp();
+	DisplayLevelZero();
+	DisplayLevelOneHalf();
 }
 
 //--------------------------------------------------------------------------------------
@@ -143,12 +148,33 @@ void PsyExerciseBuilding::DrawStairsUp()
 	for (int i = 1033; i < 1040; i++) //Stairs Up - 1033-1039 Upright / 1040-1046 Flat
 	{
 		tp->CreateDisplayList(XZ, i, 1024.0, 512.0, -844.0, step, stepLength - 100.0, 0.646, 0.195);
-		tp->CreateDisplayList(XY, i + 7, 64.0, 64.0, -844.0, step, stepLength - 100, 10.34, 1.0);
+		tp->CreateDisplayList(XY, i + 7, 64.0, 64.0, -844.0, step, stepLength - 100.0, 10.34, 1.0);
 		step += 64.0;
 		stepLength -= 100.0;
 	}
 
 }
+
+//--------------------------------------------------------------------------------------
+// Draws the Psychology and Exercise Building Level 0
+//--------------------------------------------------------------------------------------
+void PsyExerciseBuilding::DrawLevelZero()
+{
+	//Floor
+	tp->CreateDisplayList(XZ, 1047, 128.0, 128.0, -1506.0, 9550.0, 23860.0, 10.34, 16.25);
+
+}
+
+//--------------------------------------------------------------------------------------
+// Draws the Psychology and Exercise Building Level 1.5/2
+//--------------------------------------------------------------------------------------
+void PsyExerciseBuilding::DrawLevelOneHalf()
+{
+	//Floor
+	tp->CreateDisplayList(XZ, 1048, 128.0, 128.0, -1506.0, 10450.0, 23860.0, 10.34, 5.4);
+
+}
+
 
 //--------------------------------------------------------------------------------------
 // Displays the Psychology and Exercise Building doorway
@@ -260,6 +286,24 @@ void PsyExerciseBuilding::DisplayStairsUp()
 }
 
 //--------------------------------------------------------------------------------------
+// Displays the Psychology and Exercise Building Level 0
+//--------------------------------------------------------------------------------------
+void PsyExerciseBuilding::DisplayLevelZero()
+{
+	glBindTexture(GL_TEXTURE_2D, tp->GetTexture(140));	//TODO: Add floor texture for level 0
+	glCallList(1047);
+}
+
+//--------------------------------------------------------------------------------------
+// Displays the Psychology and Exercise Building Level 1.5/2
+//--------------------------------------------------------------------------------------
+void PsyExerciseBuilding::DisplayLevelOneHalf()
+{
+	glBindTexture(GL_TEXTURE_2D, tp->GetTexture(200));	//TODO: Add floor texture for level 1.5
+	glCallList(1048);
+}
+
+//--------------------------------------------------------------------------------------
 // Sets the Psychology and Exercise Building bounding boxes for collision
 //--------------------------------------------------------------------------------------
 void PsyExerciseBuilding::SetPEBCollision()
@@ -282,18 +326,28 @@ void PsyExerciseBuilding::SetPEBCollision()
 	cam->SetAABBMaxZ(18, 49046.0);
 	cam->SetAABBMinZ(18, 28500.0);
 
-	// Entrance Room Tavern side
+	// Entrance Room Tavern side + Stairwell Bush court side
 	cam->SetAABBMaxX(19, 2108.0);
 	cam->SetAABBMinX(19, -182);
 	cam->SetAABBMaxZ(19, 25940.0);
 	cam->SetAABBMinZ(19, 0.0);
 
-	// Entrance Room Student Village side
+	// Entrance Room/Stairwell Student Village side
 	cam->SetAABBMaxX(20, -1506.0);
 	cam->SetAABBMinX(20, -3000.0);
 	cam->SetAABBMaxZ(20, 49046.0);
 	cam->SetAABBMinZ(20, 0.0);
+		
+	// Stairwell Tavern Side
+	cam->SetAABBMaxX(21, -844);
+	cam->SetAABBMinX(21, -1506.0);
+	cam->SetAABBMinY(21, 10500.0);
+	cam->SetAABBMaxY(21, 30000.0);
+	cam->SetAABBMaxZ(21, 25250.0);
+	cam->SetAABBMinZ(21, 23860.0);
+
 	
+
 }
 
 //--------------------------------------------------------------------------------------
@@ -303,7 +357,7 @@ void PsyExerciseBuilding::SetPEBPlains()
 {
 	int i;
 
-	cam->SetPlains(FLAT_PLAIN, -1550.0, 36000.0, 10450.0, 10450.0, 25250.0, 45610.0); // ENDS AT PsyEx Stairwell
+	cam->SetPlains(FLAT_PLAIN, -3000.0, 36000.0, 10450.0, 10450.0, 25250.0, 45610.0); // ENDS AT PsyEx Stairwell
 
 	GLdouble step = 10450.0;
 	GLdouble stepLength = 25250.0;
@@ -311,17 +365,21 @@ void PsyExerciseBuilding::SetPEBPlains()
 	// Stairs to level 0
 	for (i = 0; i < 7; i++)
 	{
-		cam->SetPlains(FLAT_PLAIN, -1506.0, -844, step, step, stepLength, stepLength - 100);
+		cam->SetPlains(FLAT_PLAIN, -1506.0, -844.0, step, step, stepLength, stepLength - 100);
 		step -= 64.0;
 		stepLength -= 100.0;
 	}
 
+	cam->SetPlains(FLAT_PLAIN, -1506.0, -844.0, 10000.0, 10000.0, 0.0, 24550.0); // Level 0
+
 	// Stairs to level 1.5
 	for (i = 0; i < 7; i++)
 	{
-		cam->SetPlains(FLAT_PLAIN, -844, -182, step, step, stepLength, stepLength - 100);
+		cam->SetPlains(FLAT_PLAIN, -844.0, -182.0, step, step, stepLength, stepLength - 100);
 		step += 64.0;
 		stepLength -= 100.0;
 	}
+
+	cam->SetPlains(FLAT_PLAIN, -844.0, -182.0, 10898.0, 10898.0, 0.0, 24550.0); // Level 1.5
 
 }
