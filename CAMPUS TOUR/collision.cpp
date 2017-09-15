@@ -115,6 +115,7 @@ bool Collision::Collide(GLdouble endX, GLdouble endY, GLdouble endZ)
 
 //--------------------------------------------------------------------------------------
 // Called from above function to check if collsion occurred.
+// TF - Added Y axis check.
 //--------------------------------------------------------------------------------------
 bool Collision::CheckCollision(int index, GLdouble endX, GLdouble endY, GLdouble endZ)
 {
@@ -122,7 +123,8 @@ bool Collision::CheckCollision(int index, GLdouble endX, GLdouble endY, GLdouble
 	for (int count = 0; count < m_listSize[index]; count++)
 	{
 		if (((endX < m_list[index].GetMaxX(count)) && (endX > m_list[index].GetMinX(count))) &&
-			((endZ < m_list[index].GetMaxZ(count)) && (endZ > m_list[index].GetMinZ(count))))
+			((endZ < m_list[index].GetMaxZ(count)) && (endZ > m_list[index].GetMinZ(count))) && 
+			((endY < m_list[index].GetMaxY(count)) && (endY > m_list[index].GetMinY(count))))
 		{
 			CollisionFound = true;
 		}
