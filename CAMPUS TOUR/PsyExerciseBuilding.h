@@ -29,6 +29,8 @@ private:
 	void DrawStairsUp();
 	void DrawLevelZero();
 	void DrawLevelOneHalf();
+	void DrawStairwell();
+	void DrawDoorsandWindows();
 
 	void DisplayDoorway();
 	void DisplayEntranceRoom();
@@ -36,6 +38,8 @@ private:
 	void DisplayStairsUp();
 	void DisplayLevelZero();
 	void DisplayLevelOneHalf();
+	void DisplayStairwell();
+	void DisplayDoorsandWindows();
 
 	TexturedPolygons* tp;
 	Camera* cam;
