@@ -56,7 +56,8 @@ public:
 	void SetPlains (const int tempType,
 				    const GLdouble tempXs, const GLdouble tempXe,
 				    const GLdouble tempYs, const GLdouble tempYe,
-				    const GLdouble tempZs, const GLdouble tempZe);
+				    const GLdouble tempZs, const GLdouble tempZe, 
+					const GLdouble ybounds = 0, const GLdouble ybounde = 20000);
 
 	//----------------------------------------------------------------------------------
 	//  Get Methods

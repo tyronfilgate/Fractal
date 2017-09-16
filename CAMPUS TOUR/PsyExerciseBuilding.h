@@ -7,6 +7,7 @@
 
 #include "texturedPolygons.h"
 #include "camera.h"
+#include "objModel.h"
 
 class PsyExerciseBuilding
 {
@@ -31,6 +32,8 @@ private:
 	void DrawLevelOneHalf();
 	void DrawStairwell();
 	void DrawDoorsandWindows();
+	void DrawStairsUpLvl1();
+	void DrawObjObjects();
 
 	void DisplayDoorway();
 	void DisplayEntranceRoom();
@@ -40,8 +43,10 @@ private:
 	void DisplayLevelOneHalf();
 	void DisplayStairwell();
 	void DisplayDoorsandWindows();
+	void DisplayStarsUpLvl1();
+	void DisplayObjObjects();
 
 	TexturedPolygons* tp;
 	Camera* cam;
-	
+	objModel ob;
 };

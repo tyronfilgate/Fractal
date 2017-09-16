@@ -36,13 +36,15 @@ public:
 	bool AddToStart (const int tempType,
 				     const GLdouble tempXs, const GLdouble tempXe,
 				     const GLdouble tempYs, const GLdouble tempYe,
-				     const GLdouble tempZs, const GLdouble tempZe);
+				     const GLdouble tempZs, const GLdouble tempZe,
+					 const GLdouble tempybounds = 0, const GLdouble tempybounde = 20000);
 	
 	// set the values of the node data
 	void SetData(const int &ptrCount, const int tempType,
 				 const GLdouble tempXs, const GLdouble tempXe,
 				 const GLdouble tempYs, const GLdouble tempYe,
-				 const GLdouble tempZs, const GLdouble tempZe);
+				 const GLdouble tempZs, const GLdouble tempZe,
+				 const GLdouble tempybounds = 0, const GLdouble tempybounde = 20000);
 
 	//----------------------------------------------------------------------------------
 	//  Get Methods
@@ -54,6 +56,8 @@ public:
 	GLdouble GetYend (int ptrCount);
 	GLdouble GetZstart (int ptrCount);
 	GLdouble GetZend (int ptrCount);
+	GLdouble GetYBoundstart(int ptrCount);
+	GLdouble GetYBoundend(int ptrCount);
 
 	// Return size of list
 	int GetListSize ();

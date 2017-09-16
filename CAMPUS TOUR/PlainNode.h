@@ -35,6 +35,8 @@ public:
 	GLdouble GetYend () {return m_yPlainEnd;}
 	GLdouble GetZstart () {return m_zPlainStart;}
 	GLdouble GetZend () {return m_zPlainEnd;}
+	GLdouble GetYBoundStart() { return m_yBoundStart; }
+	GLdouble GetYBoundEnd() { return m_yBoundEnd; }
 
     // Return the address of the link to the next node in the list
     PlainNode *GetNext () const {return m_next;}
@@ -45,7 +47,8 @@ public:
 	void SetData(const int tempType,
 				 const GLdouble tempXs, const GLdouble tempXe,
 				 const GLdouble tempYs, const GLdouble tempYe,
-				 const GLdouble tempZs, const GLdouble tempZe);
+				 const GLdouble tempZs, const GLdouble tempZe,
+				 const GLdouble yBoundStart, const GLdouble yBoundEnd);
 
     // Set the address of the link to the next node in the list
     void SetNext (PlainNode *next) {m_next = next;}
@@ -65,6 +68,7 @@ private:
 	GLdouble m_xPlainStart, m_xPlainEnd;
 	GLdouble m_yPlainStart, m_yPlainEnd;
 	GLdouble m_zPlainStart, m_zPlainEnd;
+	GLdouble m_yBoundStart, m_yBoundEnd;
 
 	//----------------------------------------------------------------------------------
 
