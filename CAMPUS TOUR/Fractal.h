@@ -18,15 +18,15 @@ public:
 	void SetContents(TexturedPolygons* tp_value, Camera* cam_value);	//Camera and Texture objects from Shay's World.
 	void SetWindowAspects(int w, int h) { width = w; height = h; };	//Sets the width and height values in this class on reshape
 
+	bool IsFractalEntered() { return fractalEntered; };
 	bool IsWelcomeDisplayed() { return welcomeDisplay; };
 	bool IsExitDisplayed() { return exitDisplay; };
 	bool IsInstructionDisplayed() { return instructionDisplay; };
 
+	void EnterFractal(bool value) { fractalEntered = value };
 	void SetWelcomeDisplayed(bool value) { welcomeDisplay = value; };
 	void SetExitDisplayed(bool value) { exitDisplay = value; };
 	void SetInstructionDisplayed(bool value) { instructionDisplay = value; };
-
-	bool IsFractalEntered() { return fractalEntered; };
 
 private:
 
