@@ -37,7 +37,8 @@ void PlainLinkedList::Delete(PlainNode *before)
 bool PlainLinkedList::AddToStart (const int tempType,
 							      const GLdouble tempXs, const GLdouble tempXe,
 								  const GLdouble tempYs, const GLdouble tempYe,
-				                  const GLdouble tempZs, const GLdouble tempZe)
+				                  const GLdouble tempZs, const GLdouble tempZe,
+								  const GLdouble tempybounds, const GLdouble tempybounde)
 {
 	PlainNode *newNode;
 
@@ -51,7 +52,7 @@ bool PlainLinkedList::AddToStart (const int tempType,
 	}
 	
 	// add the value to the node
-	newNode->SetData(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe);
+	newNode->SetData(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe, tempybounds, tempybounde);
 	// set the address of the net node
 	newNode->SetNext(m_first->GetNext());
 	// reset the address of the first node
@@ -172,13 +173,40 @@ GLdouble PlainLinkedList::GetZend (int ptrCount)
 		return NULL;
 }
 
+GLdouble PlainLinkedList::GetYBoundstart(int ptrCount){
+	PlainNode *ptr = (m_first);
+	for (int count = 0; count < ptrCount; count++)
+	{
+		ptr = ptr->GetNext();
+	}
+
+	if (ptr->GetNext() != NULL)
+		return ptr->GetNext()->GetYBoundStart();
+	else
+		return NULL;
+}
+
+GLdouble PlainLinkedList::GetYBoundend(int ptrCount){
+	PlainNode *ptr = (m_first);
+	for (int count = 0; count < ptrCount; count++)
+	{
+		ptr = ptr->GetNext();
+	}
+
+	if (ptr->GetNext() != NULL)
+		return ptr->GetNext()->GetYBoundEnd();
+	else
+		return NULL;
+}
+
 
 //--------------------------------------------------------------------------------------
 
 void PlainLinkedList::SetData (const int &ptrCount, const int tempType,
 							   const GLdouble tempXs, const GLdouble tempXe,
 				               const GLdouble tempYs, const GLdouble tempYe,
-				               const GLdouble tempZs, const GLdouble tempZe)
+				               const GLdouble tempZs, const GLdouble tempZe,
+							   const GLdouble tempybounds, const GLdouble tempybounde)
 {
 	PlainNode *ptr = (m_first);
 
@@ -186,7 +214,7 @@ void PlainLinkedList::SetData (const int &ptrCount, const int tempType,
 	{
 		ptr = ptr->GetNext();
 	}
-	ptr->GetNext()->SetData(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe);
+	ptr->GetNext()->SetData(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe, tempybounds, tempybounde);
 }
 
 //--------------------------------------------------------------------------------------

@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "texturedPolygons.h"
 #include "PsyExerciseBuilding.h" //TF
+#include "Fractal.h" //TF
 
 //--------------------------------------------------------------------------------------
 
@@ -276,6 +277,19 @@ GLdouble rotationSpeed = 0.005;
 #define EXIT						219
 #define NO_EXIT						222
 
+#define WHITE_WALL					223
+#define CLEAR_FRAME					224
+#define BRICK_STAIRWELL				225
+#define DOOR_LEFT_PSY				226
+#define DOOR_BACK_PSY				227
+#define DOOR_RIGHT_PSY				228
+#define SHELF_RIGHT_PSY				229
+#define ROOF_PSY					230
+#define FRACTAL_EXIT				231
+#define FRACTAL_WELCOME				232
+#define FRACTAL_INSTRUCTIONs		233
+
+
 // 223 Next
 
 
@@ -315,11 +329,13 @@ unsigned char* image = NULL;
 Camera cam;
 TexturedPolygons tp;
 PsyExerciseBuilding peb; //TF
+Fractal frac;
 
 // initializes setting
 void myinit();
 
 // display functions
+void DisplayFractal();
 void Display();
 void reshape(int w, int h);
 void keys(unsigned char key, int x, int y);
@@ -420,7 +436,11 @@ int main(int argc, char **argv)
 	glutKeyboardUpFunc (releaseKeys);
 	glutKeyboardFunc(keys);
 
-	glutDisplayFunc(Display);
+	if (frac.IsFractalEntered())
+		glutDisplayFunc(DisplayFractal);
+	else
+		glutDisplayFunc(Display);
+
 	glutIdleFunc(Display);
 	glutMouseFunc(Mouse);
 	
@@ -438,6 +458,8 @@ int main(int argc, char **argv)
 //--------------------------------------------------------------------------------------
 void myinit()
 {
+	glDisable(GL_LIGHTING);
+
 	// set background (sky colour)
 	glClearColor(97.0f/255.0f, 140.0f/255.0f, 185.0f/255.0f, 1.0f);
 	
@@ -455,7 +477,7 @@ void myinit()
 	// turn collision detection on
 	cam.SetCollisionDetectionOn(true);
 	// set number of bounding boxes required
-	cam.SetNoBoundingBoxes(30);
+	cam.SetNoBoundingBoxes(31);
 	// set starting position of user
 	//ORIGINAL START POSITION - cam.Position(32720.0, 9536.0,4800.0, 180.0);
 	cam.Position(4200.0, 10450.0, 27000.0, 270.0);
@@ -476,6 +498,11 @@ void myinit()
 }
 
 //--------------------------------------------------------------------------------------
+//  Fractal Display Function
+//--------------------------------------------------------------------------------------
+void DisplayFractal() { frac.FractalDisplay(); }
+
+//--------------------------------------------------------------------------------------
 //  Main Display Function
 //--------------------------------------------------------------------------------------
 void Display()
@@ -483,6 +510,8 @@ void Display()
 	// check for movement
 	cam.CheckCamera();
 	
+	//std::cout << "Z: " << cam.GetFB() << " X: " << cam.GetLR() << " Y: " << cam.GetUD() << std::endl;
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// DISPLAY TEXTURES
@@ -492,7 +521,7 @@ void Display()
 		// displays the welcome screen
 		if (DisplayWelcome) cam.DisplayWelcomeScreen (width, height, 1, tp.GetTexture(WELCOME));	
 		// displays the exit screen
-		if (DisplayExit) cam.DisplayWelcomeScreen (width, height, 0, tp.GetTexture(EXIT) );
+		if (DisplayExit) cam.DisplayWelcomeScreen (width, height, 0, tp.GetTexture(FRACTAL_EXIT) );
 		// displays the map
 		if (DisplayMap) cam.DisplayMap(width, height, tp.GetTexture(MAP));
 		// display no exit sign (position check should really be in an object, but didn't have time)
@@ -505,6 +534,7 @@ void Display()
 		IncrementFrameCount();
 		cam.SetMoveSpeed (stepIncrement);
 		cam.SetRotateSpeed (angleIncrement);
+
 		// display images
 		DrawBackdrop();
 	glPopMatrix();
@@ -520,6 +550,9 @@ void reshape(int w, int h)
 {
 	width = w;
 	height = h;
+
+	frac.SetWindowAspects(w,h);
+
 	// Prevent a divide by zero, when window is too short
 	// (you cant make a window of zero width).
 	if (h == 0) h = 1;
@@ -896,7 +929,6 @@ void CreateBoundingBoxes()
 //--------------------------------------------------------------------------------------
 void CreatePlains()
 {	
-
 	// grass slope
 	cam.SetPlains (ZY_PLAIN, 4848.0 ,31568.0 ,9536.0, 10450.0 ,6200.0, 10000.0);
 
@@ -941,7 +973,7 @@ void CreatePlains()
 
 	// temp plain to take down to ECL1
 	cam.SetPlains (ZY_PLAIN, 3200.0, 4800.0 , 10450.0, 9370.0, 53400.0, 57900.0);
-
+	
 	peb.SetPEBPlains();
 
 }
@@ -1635,6 +1667,33 @@ void CreateTextures()
 	tp.CreateTexture(218, image, 512, 512);
 	image = tp.LoadTexture("data/thanks.raw", 512, 512);
 	tp.CreateTexture(219, image, 512, 512);
+
+	image = tp.LoadTexture("data/whitewall.raw", 128, 128);
+	tp.CreateTexture(WHITE_WALL, image, 128, 128); 
+	
+	image = tp.LoadTexture("data/clearframe.raw", 512, 256); 
+	tp.CreateTexture(CLEAR_FRAME, image, 512, 256);
+
+	image = tp.LoadTexture("data/brick.raw", 128, 128);
+	tp.CreateTexture(BRICK_STAIRWELL, image, 128, 128); 
+
+	image = tp.LoadTexture("data/doorleftPSY.raw", 1024, 1024);
+	tp.CreateTexture(DOOR_LEFT_PSY, image, 1024, 1024);
+
+	image = tp.LoadTexture("data/doorbackpsy.raw", 1024, 1024);
+	tp.CreateTexture(DOOR_BACK_PSY, image, 1024, 1024); 
+
+	image = tp.LoadTexture("data/doorrightpsy.raw", 512, 1024);
+	tp.CreateTexture(DOOR_RIGHT_PSY, image, 512, 1024);
+
+	image = tp.LoadTexture("data/shelfrightpsy.raw", 2048, 1024);
+	tp.CreateTexture(SHELF_RIGHT_PSY, image, 2048, 1024);
+
+	image = tp.LoadTexture("data/wood.raw", 128, 128);
+	tp.CreateTexture(ROOF_PSY, image, 128, 128); 
+
+	image = tp.LoadTexture("data/exit.raw", 512, 512);
+	tp.CreateTexture(FRACTAL_EXIT, image, 512, 512);
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);	
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);

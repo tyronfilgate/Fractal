@@ -267,7 +267,8 @@ void Camera::SetPlains(GLdouble & moveX, GLdouble & moveZ)
 	{
 		// if camera is positioned on a plain
 		if ((m_z <= m_Plain.GetZend(i)) && (m_z >= m_Plain.GetZstart(i))
-			&& (m_x <= m_Plain.GetXend(i)) && (m_x >= m_Plain.GetXstart(i)))
+			&& (m_x <= m_Plain.GetXend(i)) && (m_x >= m_Plain.GetXstart(i)) 
+			&& ((m_y <= m_Plain.GetYBoundend(i)) && (m_y >= m_Plain.GetYBoundstart(i))))
 		{
 			// if flat plain
 			if (m_Plain.GetType(i) == 0)
@@ -455,9 +456,10 @@ void Camera::SetWorldCoordinates (const GLdouble &tempX, const GLdouble &tempZ)
 void Camera::SetPlains (const int tempType,
 				        const GLdouble tempXs, const GLdouble tempXe,
 				        const GLdouble tempYs, const GLdouble tempYe,
-				        const GLdouble tempZs, const GLdouble tempZe)
+				        const GLdouble tempZs, const GLdouble tempZe,
+						const GLdouble tempybounds, const GLdouble tempybounde)
 {
-	m_Plain.AddToStart(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe);
+	m_Plain.AddToStart(tempType, tempXs, tempXe, tempYs, tempYe, tempZs, tempZe, tempybounds, tempybounde);
 }
 
 //--------------------------------------------------------------------------------------
